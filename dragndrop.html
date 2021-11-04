@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag & Drop</title>
+</head>
+<body>
+    <p>
+        <img id="Bin" src="Img/bin.png" alt="Bin">
+        <img class="folder" id="Red" src="/Img/red.png" alt="Folder">
+        <img class="folder" id="Yellow" src="Img/yel.png" alt="Folder">
+        <img class="folder" id="Green" src="Img/grn.png" alt="Folder">
+    </p>
+    <fieldset>
+        <legend>Folder Dropped:</legend>
+        <ol id="list"></ol>
+    </fieldset>
+
+    <script>
+        document.addEventListener("DOMContentLoaded",dragNdrop);
+        function dragNdrop() {
+            const bin = document.getElementById("Bin");
+            const folders = document.getElementsByClassName("folder");
+            const list = document.getElementById("list");
+
+            let i = 0;
+            for (let i = 0; i < folders.length; i++) {
+                folders[i].ondragstart = function (event) {
+                    event.dataTransfer.setData("Text", this.id)
+                }
+           }
+
+           bin.ondragover = function (event) { return false }
+           
+           bin.ondrop = function (event) {
+               const did = event.dataTransfer.getData("Text");               
+               const tag = document.getElementById(did);
+                list.innerHTML += "<li>" + did 
+              }
+                tag.parentNode.removeChild(tag);
+
+        }
+    </script>
+
+</body>
+</html>
