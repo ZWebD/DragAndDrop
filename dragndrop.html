@@ -8,7 +8,7 @@
 </head>
 <body>
     <p>
-        <img id="Bin" src="Img/bin.png" alt="Bin">
+        <img class="folder" id="Bin" src="Img/bin.png" alt="Bin">
         <img class="folder" id="Red" src="/Img/red.png" alt="Folder">
         <img class="folder" id="Yellow" src="Img/yel.png" alt="Folder">
         <img class="folder" id="Green" src="Img/grn.png" alt="Folder">
@@ -37,9 +37,11 @@
            bin.ondrop = function (event) {
                const did = event.dataTransfer.getData("Text");               
                const tag = document.getElementById(did);
+               if (did !== "Bin") {
                 list.innerHTML += "<li>" + did 
+                    tag.parentNode.removeChild(tag);
+                } 
               }
-                tag.parentNode.removeChild(tag);
 
         }
     </script>
